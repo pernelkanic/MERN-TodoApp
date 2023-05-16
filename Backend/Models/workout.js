@@ -11,10 +11,11 @@ title:{
 description:{
     type:String,
     required:true
-}
-
-},{timestamps:true}
-)
-
-const todomodel = mongoose.model('todomodel',WorkSchema);
-export default todomodel;
+},
+user_id: {
+    type: String,
+    required: true
+  }
+},{timestamps:true})
+ 
+export default mongoose.model('todomodel',WorkSchema);

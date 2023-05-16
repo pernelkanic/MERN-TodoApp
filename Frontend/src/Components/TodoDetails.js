@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { UNSAFE_useScrollRestoration } from "react-router-dom";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { useAuthcontext } from "./useAuthcontext";
 const TodoDetails =({workout})=>{
+    const {user} = useAuthcontext();
     const[todo,settodo] = useState('')
     const handleClick=async()=>{
-            
-            const response = await fetch('/api/workouts/' + workout._id , {
+            if(!user){
+                return;
+            }
+
+            const response = await fetch('http://localhost:4000/api/workouts/' + workout._id , {
                 method:"DELETE",
+                headers:{
+                    "Authorization":`Bearer ${user.token}`,
+                }
 
             });
             const json = await response.json();

@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import TodoDetails from './TodoDetails';
 import Filltodo from "./Filltodo";
+import { useAuthcontext } from "./useAuthcontext";
 
 const Home=()=>{
+    
     const[Workout ,setWorkout] = useState(null);
+    const {user} = useAuthcontext();
     useEffect(()=>{
+
         const fetchTodo = async()=>{
-            const response = await fetch('/api/workouts')
+            const response = await fetch('http://localhost:4000/api/workouts',{
+                headers:{
+                    "Authorization":`Bearer ${user.token}`,
+                }
+            })
             const json = await response.json()
             if(response.ok){
                  setWorkout(json);
             }
         }
-        fetchTodo();
+        if(user){
+            fetchTodo();
+        }
     },)
 
 

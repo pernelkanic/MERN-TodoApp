@@ -4,7 +4,9 @@ import mongoose from 'mongoose';
 
 
 export const getWorkout =async(req,res)=>{
-    const todoget = await todomodel.find({}).sort({createdAt:-1})
+    
+    const user_id = req.user._id
+    const todoget = await todomodel.find({user_id}).sort({createdAt: -1})
     res.status(200).json(todoget);
 }
 
@@ -33,12 +35,13 @@ export const createWork =async(req,res)=>{
     }
     if(!description){
         emptyfield.push('description')
-    }
+    }   
     if(emptyfield.length>0){
         return res.status(400).json({error:'Please enter the required fields' , emptyfield})
     }
     try{
-            const todocreate  = await todomodel.create({title,description});
+            const user_id = req.user._id
+            const todocreate  = await todomodel.create({title,description,user_id});
             res.status(200).json(todocreate);
     }
     catch(err){
@@ -50,14 +53,16 @@ export const deleteWork =async(req,res)=>{
     const {id} = req.params;
     
     if(!mongoose.Types.ObjectId.isValid(id)){
-        res.status(404).json({message:"No such todo"});
-    }
-    const getdelid = await todomodel.findById(id);
-    if(!getdelid){
         res.status(404).json({error:"No such todo"});
     }
-    const tododelid = await todomodel.findOneAndDelete({_id:id});
-    res.status(200).json(tododelid);
+    const todo = await todomodel.findOneAndDelete({_id: id})
+
+    if (!todo) {
+      return res.status(400).json({error: 'No such workout'})
+    }
+  
+    res.status(200).json(todo)
+    
 }
 
 
