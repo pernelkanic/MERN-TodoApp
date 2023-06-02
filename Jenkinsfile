@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        sh 'cd Frontend && npm i && npm run test:unit'
+      }
+    }
+
   }
 }
