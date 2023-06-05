@@ -21,7 +21,10 @@ pipeline {
 
     stage('switch') {
       steps {
-        dir(path: '/Frontend')
+        dir(path: 'Frontend') {
+          bat 'npm install '
+        }
+
       }
     }
 
