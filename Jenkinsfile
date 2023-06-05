@@ -29,12 +29,13 @@ pipeline {
     }
 
     stage('docker login') {
+      agent any
       environment {
         Docker_user = 'venkatakrishnanraghavan'
         Docker_pwd = 'venkat051203'
       }
       steps {
-        powershell 'docker login -u $Docker_user -p $Docker_pwd '
+        powershell 'docker login -u $Docker_user -p $Docker_pwd'
       }
     }
 
