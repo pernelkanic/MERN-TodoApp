@@ -7,9 +7,15 @@ pipeline {
       }
     }
 
-    stage('npm build') {
+    stage('dir switch') {
       steps {
-        sh 'cd /Frontend && npm i && npm run test:unit'
+        sh 'cd /Frontend'
+      }
+    }
+
+    stage('npm install') {
+      steps {
+        sh 'npm i '
       }
     }
 
