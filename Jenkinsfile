@@ -19,5 +19,11 @@ pipeline {
       }
     }
 
+    stage('switch') {
+      steps {
+        bat 'cd /Frontend'
+      }
+    }
+
   }
 }
