@@ -35,7 +35,7 @@ pipeline {
         Docker_pwd = 'venkat051203'
       }
       steps {
-        powershell 'docker login -u $Docker_user -p $Docker_pwd'
+        powershell 'docker login -u venkatakrishnanraghavan -p venkat051203'
       }
     }
 
