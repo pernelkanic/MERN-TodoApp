@@ -7,7 +7,7 @@ pipeline {
       }
     }
 
-    stage('error') {
+    stage('npm build') {
       steps {
         sh 'cd /Frontend && npm i && npm run test:unit'
       }
