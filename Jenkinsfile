@@ -9,7 +9,7 @@ pipeline {
 
     stage('dir switch') {
       steps {
-        sh 'cd /Frontend'
+        bat 'cd Frontend'
       }
     }
 
