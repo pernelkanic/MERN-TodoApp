@@ -8,14 +8,19 @@ pipeline {
     }
 
     stage('dir switch') {
-      steps {
-        bat 'cd Frontend'
-      }
-    }
+      parallel {
+        stage('dir switch') {
+          steps {
+            bat 'cd Frontend'
+          }
+        }
 
-    stage('npm install') {
-      steps {
-        bat 'npm i '
+        stage('npm install') {
+          steps {
+            bat 'npm install '
+          }
+        }
+
       }
     }
 
