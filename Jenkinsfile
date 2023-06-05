@@ -21,7 +21,7 @@ pipeline {
 
     stage('switch') {
       steps {
-        bat 'cd /Frontend'
+        dir(path: 'Frontend')
       }
     }
 
