@@ -48,5 +48,11 @@ pipeline {
       }
     }
 
+    stage('push') {
+      steps {
+        bat 'docker push venkatakrishnanraghavan/front-todo:latest'
+      }
+    }
+
   }
 }
