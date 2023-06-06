@@ -12,7 +12,7 @@ const Navbar=()=>{
         <header>
         <div className="container">
             <Link to ='/'>
-                <h1>Todo App</h1>
+                <h1>Todo Appp</h1>
             </Link>
         <nav>
             {user && (
