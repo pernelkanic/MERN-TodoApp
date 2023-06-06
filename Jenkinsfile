@@ -41,7 +41,7 @@ pipeline {
 
     stage('dockerimage') {
       steps {
-        bat 'docker build -f .  -t venkatakrishnanraghavan/fronttodo'
+        bat 'docker build -t venkatakrishnanraghavan/todofrontt .'
       }
     }
 
