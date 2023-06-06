@@ -35,13 +35,16 @@ pipeline {
         Docker_pwd = 'venkat051203'
       }
       steps {
-        powershell 'docker login -u venkatakrishnanraghavan -p venkat051203'
+        bat 'docker login -u venkatakrishnanraghavan -p venkat051203'
       }
     }
 
-    stage('dockerimage') {
+    stage('build image') {
       steps {
-        bat 'docker build -t venkatakrishnanraghavan/todofrontt  .'
+        dir(path: 'Frontend') {
+          bat 'docker build -t venkatakrishnanraghavan/front-todo .'
+        }
+
       }
     }
 
