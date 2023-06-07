@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
         - name: mern-k8s-front
-          image: venkatakrishnanraghavan/mytodo-front:latest
+          image: venkatakrishnanraghavan/front-todo:latest
           ports: 
             - containerPort: 80
           
