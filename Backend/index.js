@@ -1,34 +1,33 @@
-import  express  from "express";
-import dotenv from 'dotenv';
-import cors from 'cors';
-import mongoose from "mongoose";
-import workoutRoutes from './Routes/workouts.js';
-import userRoutes from './Routes/User.js'
-import helmet from 'helmet';
-import morgan from "morgan";
-dotenv.config();
-const app = express();
-app.use(cors())
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy:"cross-origin"}));
-app.use(morgan("common"));
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const express_1 = __importDefault(require("express"));
+const helmet_1 = __importDefault(require("helmet"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const morgan_1 = __importDefault(require("morgan"));
+const User_js_1 = __importDefault(require("./Routes/User.js"));
+const workouts_js_1 = __importDefault(require("./Routes/workouts.js"));
+const config_1 = __importDefault(require("./config"));
+dotenv_1.default.config();
+const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
+app.use((0, helmet_1.default)());
+app.use(helmet_1.default.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use((0, morgan_1.default)("common"));
 app.disable('etag');
-
-app.use(express.json());
-
-app.use((req,res,next)=>{
-    console.log(req.path,req.method);
-    next();
+app.use(express_1.default.json());
+app.use('/api/workouts', workouts_js_1.default);
+app.use('/api/user', User_js_1.default);
+mongoose_1.default.connect(config_1.default.mongo.url)
+    .then(() => {
+    app.listen(config_1.default.server.port, () => {
+        console.log('listening on port ', 7000);
+    });
 })
-
-app.use('/api/workouts' , workoutRoutes);
-app.use('/api/user' , userRoutes);
-mongoose.connect(process.env.MONGO_URL)
-.then(()=>{
-    app.listen(process.env.PORT,()=>{
-        console.log('listening on port ' , process.env.PORT);
-    })
-})
-.catch((err)=>{
+    .catch((err) => {
     console.log(err);
-})
+});

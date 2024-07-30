@@ -1,22 +1,24 @@
-import mongoose from "mongoose";
-import  'bcrypt';
-const schema = mongoose.Schema
-
-
-const registerSchema = new schema ({
-    name:{
-        type:String,
-        required:true,
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+require("bcrypt");
+const schema = mongoose_1.default.Schema;
+const registerSchema = new schema({
+    name: {
+        type: String,
+        required: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    password:{
-        type:String,
-        required:true,
+    password: {
+        type: String,
+        required: true,
     },
-
 });
-export default  mongoose.model("User",registerSchema);
+exports.default = mongoose_1.default.model("User", registerSchema);
